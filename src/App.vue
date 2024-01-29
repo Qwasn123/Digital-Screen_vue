@@ -3,6 +3,9 @@ import { RouterLink, RouterView } from 'vue-router'
 import Com_left_1 from './components/com_left_1.vue'
 import Com_left_2 from './components/com_left_2.vue'
 import Com_middle_1 from './components/com_middle_1.vue'
+import Com_middle_2 from './components/com_middle_2.vue'
+import Com_middle_3 from './components/com_middle_3.vue'
+import Com_middle_4 from './components/com_middle_4.vue'
 import Com_right_1 from './components/com_right_1.vue'
 import Com_right_2 from './components/com_right_2.vue'
 import Com_right_3 from './components/com_right_3.vue'
@@ -23,9 +26,9 @@ import Com_right_4 from './components/com_right_4.vue'
       </div>
       <div class="grid_middle">
         <Com_middle_1>PV1电流电压</Com_middle_1>
-        <Com_middle_1>PV2电流电压</Com_middle_1>
-        <Com_middle_1>PV3电流电压</Com_middle_1>
-        <Com_middle_1>PV4电流电压</Com_middle_1>
+        <Com_middle_2>PV2电流电压</Com_middle_2>
+        <Com_middle_3>PV3电流电压</Com_middle_3>
+        <Com_middle_4>PV4电流电压</Com_middle_4>
       </div>
       <div class="grid_right">
         <Com_right_1>设备状态</Com_right_1>

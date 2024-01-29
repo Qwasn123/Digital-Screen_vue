@@ -1,5 +1,5 @@
 <template>
-    <div class="grid_middle_1">
+    <div class="grid_middle_4">
         <h3 class="grid_middle_title">
             <slot>默认内容</slot>
         </h3>
@@ -8,7 +8,7 @@
 </template>
 
 <style scoped>
-.grid_middle_1 {
+.grid_middle_4 {
     background-size: cover;
     background-repeat: no-repeat;
     background-image: url("../assets/image/左下.png");
@@ -31,7 +31,7 @@
 <script>
 import MyChart from './MyChart.vue';
 export default {
-    name: 'Com_middle_1',
+    name: 'Com_middle_4',
     components: {
         MyChart
     },
@@ -84,14 +84,14 @@ export default {
                         name: '电流',
                         type: 'line',
                         smooth: true,
-                        data: [5, 6, 4.5],
+                        data: [9.49, 8.06, 6.06],
                         yAxisIndex: 0
                     },
                     {
                         name: '电压',
                         type: 'line',
                         smooth: true,
-                        data: [220, 230, 225],
+                        data: [210.86, 225.17, 232.39],
                         yAxisIndex: 1
                     }
                 ]
