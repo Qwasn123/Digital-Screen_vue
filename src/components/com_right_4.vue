@@ -1,5 +1,5 @@
 <template>
-    <div class="grid_right_4">
+    <div class="grid grid_right_1">
         <h1 class="grid_right_title4">
             <slot></slot>
             &nbsp;
@@ -9,15 +9,7 @@
     </div>
 </template>
 
-<style>
-.grid_right_4 {
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-image: url("../assets/image/右下.png");
-    margin: 10px;
-    border-radius: 10px;
-}
-
+<style scoped>
 .grid_right_title4 {
     margin-top: 30px;
     margin-left: 30px;

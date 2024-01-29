@@ -1,71 +1,32 @@
 <template>
-    <div class="grid_left_2">
-        <div class="grid_left_data">
-            <table>
-                <tr v-for="(row, index) in tableData" :key="index">
-                    <td>{{ row.column1 }}</td>
-                    <td>{{ row.column2 }}</td>
+    <div class="grid grid_left_1">
+        <div class="grid grid_right_1">
+            <table class="table_left_2">
+                <tr>
+                    <td class="table_type">{{ tableData.todayGenerate.title }}</td>
+                    <td>
+                        <span>{{ tableData.todayGenerate.value }}</span>&nbsp&nbsp<span class="unit-style"> {{ tableData.todayGenerate.unit }}</span>
+                    </td>
+                    <td class="table_type">{{ tableData.yesterdayGenerate.title }}</td>
+                    <td>
+                        <span>{{ tableData.yesterdayGenerate.value }}</span>&nbsp&nbsp<span class="unit-style"> {{ tableData.yesterdayGenerate.unit }}</span>
+                    </td>
                 </tr>
             </table>
         </div>
-        <h2 class="grid_left_title">
+        <h2 class="left_title">
             <slot>默认内容</slot>
         </h2>
-        <MyChart :options="option" />
+        <MyChart class="left_2" :options="option" />
     </div>
 </template>
 
-<style scoped>
-table {
-    position: relative;
-    top: 10px;
-    margin-top: 12px;
-    margin-left: 30px;
-    width: 80%;
-    border-collapse: collapse;
-}
-
-td {
-    font-weight: 700;
-    color: white;
-    padding: 8px;
-    text-align: center;
-}
-
-.grid_left_2 {
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-image: url("../assets/image/中上.png");
-    margin: 10px;
-    border-radius: 10px;
-}
-
-.grid_left_title {
-    margin-top: 15px;
-    margin-left: 30px;
-    color: white;
-}
-
-.grid_left_data {
-    position: relative;
-
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-image: url("../assets/image/右下.png");
-    margin: 10px;
-    border-radius: 10px;
-    margin-top: 10px;
-    height: 100px;
-    color: white;
-}
-
-.chart-container {
-    width: 900px;
-    height: 300px;
-}
+<style>
+.chart-container {}
 </style>
 
 <script>
+import * as echarts from 'echarts';
 import MyChart from './MyChart.vue';
 export default {
     name: 'Com_left_2',
@@ -93,17 +54,50 @@ export default {
                     type: 'value',
                     axisLabel: {
                         formatter: '{value} kWh'
-                    }
+                    },
+                    splitLine: {
+                        lineStyle: {
+                            color: 'rgba(255, 255, 255, 0.2)'
+                        },
+
+                    },
                 },
                 series: [{
                     type: 'bar',
-                    data: [27096, 24613, 25416, 21257, 43316, 24782]
+                    data: [27096, 24613, 25416, 21257, 43316, 24782],
+                    itemStyle: {
+                        normal: {
+                            color: new echarts.graphic.LinearGradient(
+                                0, 0, 0, 1,
+                                [
+                                    {
+                                        offset: 0,
+                                        color: 'rgba(129, 251, 88, 0.8)',
+                                    },
+                                    {
+                                        offset: 1,
+                                        color: 'rgba(129, 251, 88, 0.2)'
+                                    }
+                                ]
+                            )
+                        }
+
+
+                    },
                 }]
             },
-            tableData: [
-                { column1: '今日发电量(kWh)：', column2: '43316' },
-                { column1: '昨日发电量(kWh)：', column2: '24782' },
-            ],
+            tableData:{
+                todayGenerate: {
+                    title: '今日发电量：',
+                    value: '43316',
+                    unit: 'kWh',
+                },
+                yesterdayGenerate: {
+                    title: '昨日发电量：',
+                    value: '24782',
+                    unit: 'kWh',
+                },
+            }
         };
     }
 }

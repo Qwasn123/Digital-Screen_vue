@@ -1,5 +1,5 @@
 <template>
-    <div class="grid_middle_1">
+    <div class="grid grid_middle_1">
         <h3 class="grid_middle_title">
             <slot>默认内容</slot>
         </h3>
@@ -7,25 +7,13 @@
     </div>
 </template>
 
-<style scoped>
-.grid_middle_1 {
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-image: url("../assets/image/左下.png");
-    margin: 10px;
-    border-radius: 10px;
-}
-
+<style>
 .grid_middle_title {
     margin-left: 30px;
     color: white;
 }
 
-.chart-container {
-    color: white;
-    width: 450px;
-    height: 200px;
-}
+
 </style>
 
 <script>
@@ -56,7 +44,7 @@ export default {
                 xAxis: {
                     type: 'category',
                     boundaryGap: false,
-                    data: ['前日', '昨日', '今日'],
+                    data: ['1', '2', '3','4','5','6','7','8','9','10','11','12'],
 
                 },
                 yAxis: [{
@@ -84,15 +72,17 @@ export default {
                         name: '电流',
                         type: 'line',
                         smooth: true,
-                        data: [5, 6, 4.5],
-                        yAxisIndex: 0
+                        data: [11.26, 1.46, 12.24, 1.20, 8.49, 7.26, 1.48, 12.58, 7.35, 11.27, 13.65, 16.34],
+                        yAxisIndex: 0,
+                        symbol: 'none'
                     },
                     {
                         name: '电压',
                         type: 'line',
                         smooth: true,
-                        data: [220, 230, 225],
-                        yAxisIndex: 1
+                        data: [200.78, 228.99, 219.22, 213.10, 224.91, 216.40, 218.66, 208.57, 201.76, 206.26, 215.24, 228.78],
+                        yAxisIndex: 1,
+                        symbol: 'none'
                     }
                 ]
             }

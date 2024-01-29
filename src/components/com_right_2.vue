@@ -20,14 +20,11 @@
     margin-top: 20px;
 }
 
-.chart-container {
-    color: white;
-    width: 450px;
-    height: 200px;
-}
+
 </style>
 
 <script>
+import * as echarts from 'echarts';
 import MyChart from './MyChart.vue';
 export default {
     name: 'Com_right_2',
@@ -61,6 +58,7 @@ export default {
                     data: ['输入功率(kW)', '有功功率(kW)'],
                     axisLabel: {
                         color: 'white',
+                        
                     }
                 },
                 series: [
@@ -69,6 +67,25 @@ export default {
                         type: 'bar',
                         data: [8.76, 7.65],
                         barWidth: '80%',
+                        itemStyle: {
+                            normal: {
+                                color: new echarts.graphic.LinearGradient(
+                                    1, 0, 0, 0,
+                                    [
+                                        {
+                                            offset: 0,
+                                            color: 'rgba(73, 191, 245, 0.8)',
+                                        },
+                                        {
+                                            offset: 1,
+                                            color: 'rgba(73, 191, 245, 0.2)'
+                                        }
+                                    ]
+                                )
+                            }
+
+
+                        },
                     }
                 ]
             }

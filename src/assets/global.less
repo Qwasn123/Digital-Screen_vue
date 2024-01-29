@@ -1,0 +1,126 @@
+table {
+    position: relative;
+    margin-left: 30px;
+    width: 90%;
+    border-collapse: collapse;
+
+    &.table_left_1 {
+        top: 25px;
+        margin-top: 12px;
+        height: 120px;
+    }
+
+    &.table_left_2 {
+        height: 100px;
+    }
+
+    &.table_right_1 {
+        top: 15px;
+        
+    }
+    tr {
+        td {
+            font-size: x-large;
+            font-weight: 700;
+            color: white;
+            padding: 8px;
+            text-align: center;
+
+            &.table_type {
+                color: rgb(119, 212, 243);
+
+                &.tiny_type {
+                    font-size: x-large;
+                    font-weight: 600;
+                    text-align: left;
+                }
+
+                &.tiny_data{
+                    color: white;
+                    font-size: x-large;
+                    font-weight: 600;
+                    text-align: left;
+                }
+                &.tiny_status{
+                    color: greenyellow;
+                    font-size: x-large;
+                    font-weight: 600;
+                    text-align: left;
+                }
+                &.tiny_temp{
+                    color: orange;
+                    font-size: x-large;
+                    font-weight: 600;
+                    text-align: left;
+                }
+            }
+
+
+
+
+            span {
+                &.unit-style {
+                    font-size: medium;
+                    /* 较小的字体大小 */
+                    font-weight: 300;
+                    /* 正常字体粗细 */
+                    color: rgb(119, 212, 243);
+                }
+
+            }
+        }
+
+
+    }
+}
+
+.chart-container {
+    width: 450px;
+    height: 200px;
+}
+
+div {
+    &.grid {
+        background-size: cover;
+        background-repeat: no-repeat;
+        margin: 10px;
+        border-radius: 10px;
+
+        &.grid_left_1 {
+            background-image: url("./image/中上.png");
+        }
+
+        &.grid_middle_1 {
+            background-image: url("./image/左下.png");
+        }
+
+        &.grid_right_1 {
+            background-image: url("./image/右下.png");
+
+            &.left_1 {
+                height: 170px;
+            }
+        }
+
+    }
+}
+
+h2 {
+    &.left_title {
+        margin-top: 15px;
+        margin-left: 30px;
+        color: rgb(119, 212, 243);
+    }
+}
+
+.chart-container {
+    &.left_1 {
+        width: 900px;
+        height: 250px;
+    }
+
+    &.left_2 {
+        width: 900px;
+        height: 300px;
+    }
+}

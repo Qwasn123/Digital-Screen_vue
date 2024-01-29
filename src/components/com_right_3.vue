@@ -1,35 +1,31 @@
 <template>
-    <div class="grid_right_3">
-        <table>
-            <tr v-for="(row, index) in tableData" :key="index">
-                <td>{{ row.column1 }}</td>
-                <td>{{ row.column2 }}</td>
+    <div class="grid grid_right_1">
+        <table class="table_right_1">
+            <tr>
+                <td class="table_type tiny_type">{{ tableData.todayMaxP.title }}</td>
+                <td class="table_type tiny_data">
+                    <span>{{ tableData.todayMaxP.value }}</span>&nbsp&nbsp<span class="unit-style"> {{ tableData.todayMaxP.unit }}</span>
+                </td>
+            </tr>
+            <tr>
+                <td class="table_type tiny_type">{{ tableData.pNum.title }}</td>
+                <td class="table_type tiny_data">
+                    <span>{{ tableData.pNum.value }}</span>&nbsp&nbsp<span class="unit-style"> {{ tableData.pNum.unit }}</span>
+                </td>
+            </tr>
+            <tr>
+                <td class="table_type tiny_type">{{ tableData.efficiency.title }}</td>
+                <td class="table_type tiny_data">
+                    <span>{{ tableData.efficiency.value }}</span>&nbsp&nbsp<span class="unit-style"> {{ tableData.efficiency.unit }}</span>
+                </td>
             </tr>
         </table>
     </div>
 </template>
 
 <style scoped>
-.grid_right_3 {
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-image: url("../assets/image/右下.png");
-    margin: 10px;
-    border-radius: 10px;
-}
-
 table {
-    margin-top: 25px;
-    margin-left: 30px;
     width: 80%;
-    border-collapse: collapse;
-}
-
-td {
-    font-weight: 700;
-    color: white;
-    padding: 8px;
-    text-align: left;
 }
 </style>
 
@@ -38,11 +34,23 @@ export default {
     data() {
         return {
             // 表格数据
-            tableData: [
-                { column1: '当日峰值有功功率：', column2: '13.24 千瓦' },
-                { column1: '    功率因数   ：', column2: '0.85' },
-                { column1: '效率：', column2: '83.37%' },
-            ],
+            tableData: {
+                todayMaxP: {
+                    title: '当日峰值有功功率：',
+                    value: '13.24',
+                    unit: 'kW'
+                },
+                pNum: {
+                    title: '功率因数：',
+                    value: '0.85',
+                    unit: ''
+                },
+                efficiency: {
+                    title: '效率：',
+                    value: '83.37%',
+                    unit: ''
+                }
+            }
         };
     },
     name: 'Com_right_3',
