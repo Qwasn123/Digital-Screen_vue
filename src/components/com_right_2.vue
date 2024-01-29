@@ -1,6 +1,9 @@
 <template>
     <div class="grid_right_2">
-        <MyChart :options="option" />
+        <div class="grid_right_title2">
+            <MyChart :options="option" />
+        </div>
+
     </div>
 </template>
 
@@ -14,8 +17,7 @@
 }
 
 .grid_right_title2 {
-    margin-left: 30px;
-    color: white;
+    margin-top: 20px;
 }
 
 .chart-container {
@@ -42,13 +44,13 @@ export default {
                         type: 'shadow'
                     }
                 },
-                grid:{
-                    left:'20%'
+                grid: {
+                    left: '25%'
                 },
                 xAxis: {
                     type: 'value',
-                    axisLabel:{
-                        color:'white'
+                    axisLabel: {
+                        color: 'white'
                     },
                     splitLine: {
                         show: false
@@ -56,16 +58,16 @@ export default {
                 },
                 yAxis: {
                     type: 'category',
-                    data: ['输入功率', '有功功率'],
-                    axisLabel:{
-                        color:'white'
+                    data: ['输入功率(kW)', '有功功率(kW)'],
+                    axisLabel: {
+                        color: 'white',
                     }
                 },
                 series: [
                     {
                         name: '示例数据',
                         type: 'bar',
-                        data: [120, 200, 150, 80, 70],
+                        data: [8.76, 7.65],
                         barWidth: '80%',
                     }
                 ]

@@ -19,7 +19,7 @@
 }
 
 .grid_right_title4 {
-    margin-top: 18px;
+    margin-top: 30px;
     margin-left: 30px;
     color: white;
 }

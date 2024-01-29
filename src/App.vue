@@ -6,7 +6,12 @@ import Com_middle_1 from './components/com_middle_1.vue'
 import Com_middle_2 from './components/com_middle_2.vue'
 import Com_middle_3 from './components/com_middle_3.vue'
 import Com_middle_4 from './components/com_middle_4.vue'
-import Com_right_1 from './components/com_right_1.vue'
+import Com_right_1_1 from './components/com_right_1(1).vue'
+import Com_right_1_2 from './components/com_right_1(2).vue'
+import Com_right_1_3 from './components/com_right_1(3).vue'
+import Com_right_1_4 from './components/com_right_1(4).vue'
+import Com_right_1_5 from './components/com_right_1(5).vue'
+import Com_right_1_6 from './components/com_right_1(6).vue'
 import Com_right_2 from './components/com_right_2.vue'
 import Com_right_3 from './components/com_right_3.vue'
 import Com_right_4 from './components/com_right_4.vue'
@@ -31,12 +36,12 @@ import Com_right_4 from './components/com_right_4.vue'
         <Com_middle_4>PV4电流电压</Com_middle_4>
       </div>
       <div class="grid_right">
-        <Com_right_1>设备状态</Com_right_1>
-        <Com_right_1>内部温度</Com_right_1>
-        <Com_right_1>最大有功</Com_right_1>
-        <Com_right_1>最大视在</Com_right_1>
-        <Com_right_1>组串个数</Com_right_1>
-        <Com_right_1>MPPT个数</Com_right_1>
+        <Com_right_1_1>设备状态</Com_right_1_1>
+        <Com_right_1_2>内部温度</Com_right_1_2>
+        <Com_right_1_3>最大有功</Com_right_1_3>
+        <Com_right_1_4>最大视在</Com_right_1_4>
+        <Com_right_1_5>组串个数</Com_right_1_5>
+        <Com_right_1_6>MPPT个数</Com_right_1_6>
         <Com_right_2></Com_right_2>
         <Com_right_3></Com_right_3>
         <Com_right_4>系统时间：</Com_right_4>

@@ -1,5 +1,5 @@
 <template>
-    <div class="grid_right_3">
+    <div class="grid_right_1">
         <table>
             <tr v-for="(row, index) in tableData" :key="index">
                 <td>{{ row.column1 }}</td>
@@ -10,7 +10,7 @@
 </template>
 
 <style scoped>
-.grid_right_3 {
+.grid_right_1 {
     background-size: cover;
     background-repeat: no-repeat;
     background-image: url("../assets/image/右下.png");
@@ -19,13 +19,15 @@
 }
 
 table {
-    margin-top: 25px;
+    margin-top: 10px;
     margin-left: 30px;
-    width: 80%;
+    width: 90%;
     border-collapse: collapse;
 }
 
 td {
+    position: relative;
+    bottom: 4px;
     font-weight: 700;
     color: white;
     padding: 8px;
@@ -39,13 +41,12 @@ export default {
         return {
             // 表格数据
             tableData: [
-                { column1: '当日峰值有功功率：', column2: '13.24 千瓦' },
-                { column1: '    功率因数   ：', column2: '0.85' },
-                { column1: '效率：', column2: '83.37%' },
+                { column1: '设备状态: ', column2: '在线' },
+                
             ],
         };
     },
-    name: 'Com_right_3',
+    name: 'Com_right_1_1',
     methods: {
 
     }
