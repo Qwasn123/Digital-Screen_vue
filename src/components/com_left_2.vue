@@ -31,6 +31,7 @@ td {
     padding: 8px;
     text-align: center;
 }
+
 .grid_left_2 {
     background-size: cover;
     background-repeat: no-repeat;
@@ -46,6 +47,8 @@ td {
 }
 
 .grid_left_data {
+    position: relative;
+    left: 20px;
     background-size: cover;
     background-repeat: no-repeat;
     background-image: url("../assets/image/右下.png");
@@ -60,7 +63,6 @@ td {
     width: 900px;
     height: 300px;
 }
-
 </style>
 
 <script>
@@ -87,15 +89,20 @@ export default {
                         color: 'white'
                     }
                 },
-                yAxis: {},
+                yAxis: {
+                    type: 'value',
+                    axisLabel: {
+                        formatter: '{value} kWh'
+                    }
+                },
                 series: [{
                     type: 'bar',
-                    data: [50, 45, 75, 55, 50, 71]
+                    data: [27096, 24613, 25416, 21257, 43316, 24782]
                 }]
             },
             tableData: [
-                { column1: '今日发电量：', column2: 'XXXXX' },
-                { column1: '昨日发电量：', column2: 'XXXXX' },
+                { column1: '今日发电量(kWh)：', column2: '43316' },
+                { column1: '昨日发电量(kWh)：', column2: '24782' },
             ],
         };
     }

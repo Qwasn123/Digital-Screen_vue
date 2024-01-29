@@ -81,7 +81,7 @@ export default {
                     }
                 },
                 legend: {
-                    data: ['发电量', '用电量'],
+                    data: ['发电量(kWh)', '用电量(kWh)'],
                     textStyle: {
                         color: 'white' // 绿色
                     }
@@ -99,22 +99,22 @@ export default {
                 },
                 series: [
                     {
-                        name: '发电量',
+                        name: '发电量(kWh)',
                         type: 'bar',
-                        data: [120, 200, 150, 80, 70, 100]
+                        data: [27096, 24613, 25416, 21257, 43316, 24782]
                     },
                     {
-                        name: '用电量',
+                        name: '用电量(kWh)',
                         type: 'bar',
-                        data: [60, 180, 90, 140, 100, 90]
+                        data: [26902, 42148, 26360, 29784, 42085, 17457]
                     }
                 ]
             },
             tableData: [
-                { column1: '今日发电量：', column2: 'XXXXX' },
-                { column1: '今日用电量：', column2: 'XXXXX' },
-                { column1: '昨日发电量：', column2: 'XXXXX' },
-                { column1: '昨日用电量：', column2: 'XXXXX' },
+                { column1: '今日发电量(kWh)：', column2: '24,782' },
+                { column1: '今日用电量(kWh)：', column2: '17,457' },
+                { column1: '昨日发电量(kWh)：', column2: '43,316' },
+                { column1: '昨日用电量(kWh)：', column2: '42,085' },
             ],
         };
     }
