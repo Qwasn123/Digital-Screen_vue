@@ -48,7 +48,7 @@ td {
 
 .grid_left_data {
     position: relative;
-    left: 20px;
+
     background-size: cover;
     background-repeat: no-repeat;
     background-image: url("../assets/image/右下.png");
