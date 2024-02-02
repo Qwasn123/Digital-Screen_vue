@@ -5,11 +5,13 @@
                 <tr>
                     <td class="table_type">{{ tableData.todayGenerate.title }}</td>
                     <td>
-                        <span>{{ tableData.todayGenerate.value }}</span>&nbsp&nbsp<span class="unit-style"> {{ tableData.todayGenerate.unit }}</span>
+                        <span>{{ tableData.todayGenerate.value }}</span>&nbsp&nbsp<span class="unit-style"> {{
+                            tableData.todayGenerate.unit }}</span>
                     </td>
                     <td class="table_type">{{ tableData.yesterdayGenerate.title }}</td>
                     <td>
-                        <span>{{ tableData.yesterdayGenerate.value }}</span>&nbsp&nbsp<span class="unit-style"> {{ tableData.yesterdayGenerate.unit }}</span>
+                        <span>{{ tableData.yesterdayGenerate.value }}</span>&nbsp&nbsp<span class="unit-style"> {{
+                            tableData.yesterdayGenerate.unit }}</span>
                     </td>
                 </tr>
             </table>
@@ -17,26 +19,78 @@
         <h2 class="left_title">
             <slot>默认内容</slot>
         </h2>
-        <MyChart class="left_2" :options="option" />
+        <MyChart ref="chart2" class="left_2" :options="option" />
     </div>
 </template>
 
-<style>
-.chart-container {}
-</style>
+<style></style>
 
 <script>
+import { useGenerateStore } from '../stores/counter'
+import * as lodash from 'lodash';
 import * as echarts from 'echarts';
 import MyChart from './MyChart.vue';
 export default {
     name: 'Com_left_2',
-    methods: {},
+    computed: {
+        dayOneGenerate() {
+            const gen_store = useGenerateStore();
+            return gen_store.getDay1();
+        },
+        dayTwoGenerate() {
+            const gen_store = useGenerateStore();
+            return gen_store.getDay2();
+        },
+        dayThreeGenerate() {
+            const gen_store = useGenerateStore();
+            return gen_store.getDay3();
+        },
+        dayFourGenerate() {
+            const gen_store = useGenerateStore();
+            return gen_store.getDay4();
+        },
+        dayFiveGenerate() {
+            const gen_store = useGenerateStore();
+            return gen_store.getDay5();
+        },
+        daySixGenerate() {
+            const gen_store = useGenerateStore();
+            return gen_store.getDay6();
+        },
+    },
+    methods: {
+        setCharts() {
+            this.tableData.todayGenerate.value = this.daySixGenerate;
+            this.tableData.yesterdayGenerate.value = this.dayFiveGenerate;
+            this.option.series[0].data = [this.dayOneGenerate, this.dayTwoGenerate, this.dayThreeGenerate, this.dayFourGenerate, this.dayFiveGenerate, this.daySixGenerate];
+        },
+        updateData() {
+
+            // this.$refs.chart1.disposeChart();
+            this.setCharts();
+            this.$refs.chart2.updateMyChart();
+
+        }
+
+    },
     components: {
         MyChart
     },
+    beforeMount() {
+        this.setCharts();
+    },
+    mounted() {
+        setInterval(() => {
+            this.updateData();
+        }, this.interval.value);
+    },
     data() {
         return {
+            interval: {
+                value: '5000'
+            },
             option: {
+
                 tooltip: {
                     trigger: 'axis',
                     axisPointer: {
@@ -66,35 +120,35 @@ export default {
                     type: 'bar',
                     data: [27096, 24613, 25416, 21257, 43316, 24782],
                     itemStyle: {
-                        normal: {
-                            color: new echarts.graphic.LinearGradient(
-                                0, 0, 0, 1,
-                                [
-                                    {
-                                        offset: 0,
-                                        color: 'rgba(129, 251, 88, 0.8)',
-                                    },
-                                    {
-                                        offset: 1,
-                                        color: 'rgba(129, 251, 88, 0.2)'
-                                    }
-                                ]
-                            )
-                        }
+
+                        color: new echarts.graphic.LinearGradient(
+                            0, 0, 0, 1,
+                            [
+                                {
+                                    offset: 0,
+                                    color: 'rgba(129, 251, 88, 0.8)',
+                                },
+                                {
+                                    offset: 1,
+                                    color: 'rgba(129, 251, 88, 0.2)'
+                                }
+                            ]
+                        )
+
 
 
                     },
                 }]
             },
-            tableData:{
+            tableData: {
                 todayGenerate: {
-                    title: '今日发电量：',
-                    value: '43316',
+                    title: '今日累计发电量：',
+                    value: '24782',
                     unit: 'kWh',
                 },
                 yesterdayGenerate: {
-                    title: '昨日发电量：',
-                    value: '24782',
+                    title: '昨日累计发电量：',
+                    value: '43316',
                     unit: 'kWh',
                 },
             }

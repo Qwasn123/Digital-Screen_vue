@@ -12,6 +12,7 @@
 <style></style>
 
 <script>
+import * as lodash from 'lodash'
 export default {
     data() {
         return {

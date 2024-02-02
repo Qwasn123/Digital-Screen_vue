@@ -33,35 +33,82 @@
         <h2 class="left_title">
             <slot>默认内容</slot>
         </h2>
-        <MyChart class="left_1" :options="option" />
+
+        <MyChart ref="chart1" class="left_1" :options="option" />
+
     </div>
 </template>
 
 <style></style>
 
 <script>
-import * as _ from 'lodash'
+import { useGenerateStore } from '../stores/counter'
+import * as lodash from 'lodash'
 import * as echarts from 'echarts';
 import MyChart from './MyChart.vue';
+
+
+
 export default {
     name: 'Com_left_1',
     methods: {
         initData: function () {
-
-            //....
-
-            this.getRemoteData();
+            this.setCharts();
         },
-        getRemoteData: function () {
-            this.tableData.yesterdayGenerate.value = _.random(0, 5);
+
+        setCharts: function () {
+            var dayOneUse = lodash.random(10000, 50000);
+            var dayTwoUse = lodash.random(10000, 50000);
+            var dayThreeUse = lodash.random(10000, 50000);
+            var dayFourUse = lodash.random(10000, 50000);
+            var dayFiveUse = lodash.random(10000, 50000);
+            var daySixUse = lodash.random(10000, 50000);
+            const gen_store = useGenerateStore();
+            gen_store.getRemoteData();
+            var dayOneGenerate = gen_store.getDay1();
+            var dayTwoGenerate = gen_store.getDay2();
+            var dayThreeGenerate = gen_store.getDay3();
+            var dayFourGenerate = gen_store.getDay4();
+            var dayFiveGenerate = gen_store.getDay5();
+            var daySixGenerate = gen_store.getDay6();
+            this.option.series[0].data = [dayOneGenerate, dayTwoGenerate, dayThreeGenerate, dayFourGenerate, dayFiveGenerate, daySixGenerate];
+            this.option.series[1].data = [dayOneUse, dayTwoUse, dayThreeUse, dayFourUse, dayFiveUse, daySixUse];
+            this.tableData.todayGenerate.value = daySixGenerate;
+            this.tableData.todayUse.value = daySixUse;
+            this.tableData.yesterdayGenerate.value = dayFiveGenerate;
+            this.tableData.yesterdayUse.value = dayFiveUse;
         },
+        updateData() {
+
+
+            this.setCharts();
+            this.$refs.chart1.updateMyChart();
+
+        }
+
     },
+    created() {
+        this.initData();
+    },
+    beforeMount() {
 
+    },
+    mounted() {
+        setInterval(() => {
+            this.updateData();
+        }, this.interval.value);
+    },
+    beforeUnmount() {
+
+    },
     components: {
         MyChart
     },
     data() {
         return {
+            interval: {
+                value: '5000'
+            },
             option: {
                 tooltip: {
                     trigger: 'axis',
@@ -97,21 +144,21 @@ export default {
                         type: 'bar',
                         data: [27096, 24613, 25416, 21257, 43316, 24782],
                         itemStyle: {
-                            normal: {
-                                color: new echarts.graphic.LinearGradient(
-                                    0, 0, 0, 1,
-                                    [
-                                        {
-                                            offset: 0,
-                                            color: 'rgba(129, 251, 88, 0.8)',
-                                        },
-                                        {
-                                            offset: 1,
-                                            color: 'rgba(129, 251, 88, 0.2)'
-                                        }
-                                    ]
-                                )
-                            }
+
+                            color: new echarts.graphic.LinearGradient(
+                                0, 0, 0, 1,
+                                [
+                                    {
+                                        offset: 0,
+                                        color: 'rgba(129, 251, 88, 0.8)',
+                                    },
+                                    {
+                                        offset: 1,
+                                        color: 'rgba(129, 251, 88, 0.2)'
+                                    }
+                                ]
+                            )
+
 
 
                         },
@@ -121,21 +168,21 @@ export default {
                         type: 'bar',
                         data: [26902, 42148, 26360, 29784, 42085, 17457],
                         itemStyle: {
-                            normal: {
-                                color: new echarts.graphic.LinearGradient(
-                                    0, 0, 0, 1,
-                                    [
-                                        {
-                                            offset: 0,
-                                            color: 'rgba(255, 165, 0, 0.8)',
-                                        },
-                                        {
-                                            offset: 1,
-                                            color: 'rgba(255, 165, 0, 0.2)'
-                                        }
-                                    ]
-                                )
-                            }
+
+                            color: new echarts.graphic.LinearGradient(
+                                0, 0, 0, 1,
+                                [
+                                    {
+                                        offset: 0,
+                                        color: 'rgba(255, 165, 0, 0.8)',
+                                    },
+                                    {
+                                        offset: 1,
+                                        color: 'rgba(255, 165, 0, 0.2)'
+                                    }
+                                ]
+                            )
+
 
 
                         },

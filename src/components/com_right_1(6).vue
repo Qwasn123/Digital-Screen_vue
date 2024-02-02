@@ -15,23 +15,37 @@
 <style></style>
 
 <script>
+import * as lodash from 'lodash'
 export default {
     data() {
         return {
+            interval:{
+                value:'1000'
+            },
             // 表格数据
             tableData: {
                 sMax: {
                     title: '最大视在功率Smax:  ',
-                    value: '20.37',
-                    unit: ' kA'
+                    value: '0',
+                    unit: ' kW'
                 }
             }
         };
     },
     name: 'Com_right_1_6',
     methods: {
-
-    }
+        updateS: function () {
+            var nowS = Number(lodash.random(0, 10,true).toFixed(2));
+            if (nowS >= this.tableData.sMax.value) {
+                this.tableData.sMax.value = nowS;
+            }
+        }
+    },
+    mounted() {
+       setInterval(() => {
+        this.updateS();
+       } , this.interval.value)
+    },
 }
 
 </script>

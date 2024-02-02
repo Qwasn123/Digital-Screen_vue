@@ -1,7 +1,7 @@
 <template>
     <div class="grid_right_2">
         <div class="grid_right_title2">
-            <MyChart :options="option" />
+            <MyChart ref="chart4" :options="option" />
         </div>
 
     </div>
@@ -19,21 +19,42 @@
 .grid_right_title2 {
     margin-top: 20px;
 }
-
-
 </style>
 
 <script>
+import { useGenerateStore } from '../stores/counter'
+import * as lodash from 'lodash'
 import * as echarts from 'echarts';
 import MyChart from './MyChart.vue';
 export default {
     name: 'Com_right_2',
-    methods: {},
+    methods: {
+        setCharts: function () {
+            var efficientP = Number(lodash.random(3, 10, true).toFixed(2));
+            var inputP = Number(lodash.random(3, 10, true).toFixed(2));
+            this.option.series[0].data = [inputP, efficientP];
+        },
+        updateData: function () {
+            this.setCharts();
+            this.$refs.chart4.updateMyChart();
+        }
+    },
     components: {
         MyChart
     },
+    beforeMount() {
+        this.setCharts();
+    },
+    mounted() {
+        setInterval(() => {
+            this.updateData();
+        }, this.interval.value);
+    },
     data() {
         return {
+            interval: {
+                value: '2000'
+            },
             option: {
                 tooltip: {
                     trigger: 'axis',
@@ -58,7 +79,7 @@ export default {
                     data: ['输入功率(kW)', '有功功率(kW)'],
                     axisLabel: {
                         color: 'white',
-                        
+
                     }
                 },
                 series: [
@@ -68,7 +89,7 @@ export default {
                         data: [8.76, 7.65],
                         barWidth: '80%',
                         itemStyle: {
-                            normal: {
+                            
                                 color: new echarts.graphic.LinearGradient(
                                     1, 0, 0, 0,
                                     [
@@ -82,7 +103,7 @@ export default {
                                         }
                                     ]
                                 )
-                            }
+                            
 
 
                         },
