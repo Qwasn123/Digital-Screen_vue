@@ -64,11 +64,11 @@ html, body, h1, p {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-image: url("./assets/image/黑色背景.png");
+  background-image: url("./assets/image/back.png");
 }
 
 .grid_header{
-  background-image: url("./assets/image/背景标题.png");
+  background-image: url("./assets/image/title.png");
   margin: 0px;
   width: 100%;
   height: 108px;
@@ -101,6 +101,9 @@ html, body, h1, p {
   display: grid;
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 4fr 3fr 2fr;
   height: 972px;
+}
+html, body {
+  overflow: hidden; 
 }
 
 </style>

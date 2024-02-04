@@ -11,7 +11,7 @@
 .grid_right_2 {
     background-size: cover;
     background-repeat: no-repeat;
-    background-image: url("../assets/image/右下.png");
+    background-image: url("../assets/image/right.png");
     margin: 10px;
     border-radius: 10px;
 }
