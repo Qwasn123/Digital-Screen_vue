@@ -16,6 +16,7 @@ table {
 </style>
 
 <script>
+import { fetchData } from '@/utils/http';
 export default {
     data() {
         return {
@@ -23,15 +24,26 @@ export default {
             tableData: {
                 MTTPNum: {
                     title: 'MPPT 个数:  ',
-                    value: '1'
+                    value: '0'
                 }
-            }
+            },
+            interval: {
+                value: '1000'
+            },
         };
     },
     name: 'Com_right_1_4',
     methods: {
 
-    }
+    },
+    mounted() {
+        setInterval(() => {
+            fetchData('/index/GetData/resource_realtime_data/cid/gfbwx_mppt_num').then((data) => {
+                // console.log(data.item.value);
+                this.tableData.MTTPNum.value = data.item.value;
+            })
+        }, this.interval.value)
+    },
 }
 
 </script>

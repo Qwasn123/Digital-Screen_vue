@@ -30,6 +30,7 @@ import { useGenerateStore } from '../stores/counter'
 import * as lodash from 'lodash';
 import * as echarts from 'echarts';
 import MyChart from './MyChart.vue';
+import { fetchData } from '@/utils/http';
 export default {
     name: 'Com_left_2',
     computed: {
@@ -60,8 +61,10 @@ export default {
     },
     methods: {
         setCharts() {
-            this.tableData.todayGenerate.value = this.daySixGenerate;
-            this.tableData.yesterdayGenerate.value = this.dayFiveGenerate;
+            fetchData('/index/GetData/resource_realtime_data/cid/gfbwx_today_power_generation').then((data) => {
+                // console.log(data);
+                this.tableData.todayGenerate.value = data.item.value;
+            })
             this.option.series[0].data = [this.dayOneGenerate, this.dayTwoGenerate, this.dayThreeGenerate, this.dayFourGenerate, this.dayFiveGenerate, this.daySixGenerate];
         },
         updateData() {

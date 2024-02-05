@@ -12,6 +12,7 @@
 <style></style>
 
 <script>
+import { fetchData } from '@/utils/http';
 import * as lodash from 'lodash'
 export default {
     data() {
@@ -22,14 +23,31 @@ export default {
                     title: '设备状态: ',
                     status: '在线'
                 }
-            }
+            },
+            interval: {
+                value: '1000'
+            },
 
         };
     },
     name: 'Com_right_1_1',
     methods: {
 
-    }
+    },
+    created() {
+        fetchData('/index/GetData/resource_realtime_data/cid/gfbwx_device_status').then((data) => {
+            // console.log(data);
+            this.tableData.deviceStatus.status = data.item.value;
+        })
+    },
+    mounted() {
+        setInterval(() => {
+            fetchData('/index/GetData/resource_realtime_data/cid/gfbwx_device_status').then((data) => {
+            // console.log(data);
+            this.tableData.deviceStatus.status = data.item.value;
+        })
+        }, this.interval.value)
+    },
 }
 
 </script>

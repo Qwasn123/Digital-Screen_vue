@@ -3,7 +3,18 @@
         <h3 class="grid_middle_title">
             <slot>默认内容</slot>
         </h3>
-        <MyChart ref="chart3" :options="option" />
+        <table style="position: relative;bottom: 10px;">
+            <tr>
+                <td class="table_type middle_type">{{ this.tableData.pv1A.title }}</td>
+                <td class="table_type middle_data" style="position: relative;right: 30px;">{{ this.tableData.pv1A.value }}&nbsp<span class="unit-style"> {{ this.tableData.pv1A.unit
+                }} </span> </td>
+                <td class="table_type middle_type">{{ this.tableData.pv1V.title }}</td>
+                <td class="table_type middle_data" style="position: relative;right: 30px;">{{ this.tableData.pv1V.value }}&nbsp<span class="unit-style">{{ this.tableData.pv1V.unit
+                }}</span> </td>
+
+            </tr>
+        </table>
+        <MyChart ref="chart3" style="position: relative;bottom: 10px;" :options="option" />
     </div>
 </template>
 
@@ -71,14 +82,27 @@ export default {
     },
     data() {
         return {
-            interval:{
-                value:'10000'
+            tableData: {
+                pv1A: {
+                    title: 'PV1电流:',
+                    value: '0',
+                    unit: 'A',
+                },
+                pv1V: {
+                    title: 'PV1电压:',
+                    value: '0',
+                    unit: 'V',
+                },
+            },
+            interval: {
+                value: '10000'
             },
             option: {
                 tooltip: {
                     trigger: 'axis'
                 },
                 grid: {
+
                     left: '8%',
                     right: '8%',
                     bottom: '25%',
@@ -94,7 +118,6 @@ export default {
                     type: 'category',
                     boundaryGap: false,
                     data: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
-
                 },
                 yAxis: [{
                     type: 'value',

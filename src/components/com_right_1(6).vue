@@ -2,11 +2,11 @@
     <div class="grid grid_right_1">
         <table>
             <tr v-for="(row, index) in tableData" :key="index">
-                <td class="table_type tiny_type">{{ tableData.sMax.title }}</td>
+                <td class="table_type tiny_type">{{ tableData.efficiency.title }}</td>
                 <td class="table_type tiny_data">
-                    <span>{{ tableData.sMax.value }}</span>&nbsp&nbsp<span class="unit-style"> {{ tableData.sMax.unit }}</span>
+                    <span>{{ tableData.efficiency.value }}</span>&nbsp&nbsp<span class="unit-style"> {{
+                        tableData.efficiency.unit }}</span>
                 </td>
-
             </tr>
         </table>
     </div>
@@ -16,35 +16,36 @@
 
 <script>
 import * as lodash from 'lodash'
+import { fetchData } from '@/utils/http';
 export default {
     data() {
         return {
-            interval:{
-                value:'1000'
+            interval: {
+                value: '1000'
             },
             // 表格数据
             tableData: {
-                sMax: {
-                    title: '最大视在功率Smax:  ',
-                    value: '0',
-                    unit: ' kW'
+                efficiency: {
+                    title: '效率：',
+                    value: '',
+                    unit: '%'
                 }
+                
             }
         };
     },
     name: 'Com_right_1_6',
     methods: {
-        updateS: function () {
-            var nowS = Number(lodash.random(0, 10,true).toFixed(2));
-            if (nowS >= this.tableData.sMax.value) {
-                this.tableData.sMax.value = nowS;
-            }
-        }
+        updateEfficiency: function () {
+            this.tableData.efficiency.value = Number(lodash.random(80, 100, true).toFixed(2));
+        },
     },
     mounted() {
-       setInterval(() => {
-        this.updateS();
-       } , this.interval.value)
+        setInterval(() => {
+            fetchData('/index/GetData/resource_realtime_data/cid/gfbwx_pn').then((data) => {
+                this.tableData.efficiency.value = data.item.value
+            })
+        }, this.interval.value)
     },
 }
 

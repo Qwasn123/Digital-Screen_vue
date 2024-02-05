@@ -16,14 +16,24 @@ table {
 </style>
 
 <script>
+import { fetchData } from '@/utils/http';
 import * as lodash from 'lodash'
 export default {
-    computed:{
+    computed: {
     },
     methods: {
         updateTemp: function () {
-            this.tableData.insideTemp.value = Number(lodash.random(30, 80, true).toFixed(1));
+            fetchData('/index/GetData/resource_realtime_data/cid/gfbwx_inside_temperature').then((data) => {
+                // console.log(data.item.value);
+                this.tableData.insideTemp.value = data.item.value;
+            })
         }
+    },
+    created() {
+        fetchData('/index/GetData/resource_realtime_data/cid/gfbwx_inside_temperature').then((data) => {
+            // console.log(data.item.value);
+            this.tableData.insideTemp.value = data.item.value;
+        })
     },
     mounted() {
         setInterval(() => {
@@ -39,7 +49,7 @@ export default {
             tableData: {
                 insideTemp: {
                     title: '内部温度: ',
-                    value: '47.1',
+                    value: '0',
                     unit: ' °C'
                 }
             }

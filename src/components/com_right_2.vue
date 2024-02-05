@@ -26,13 +26,19 @@ import { useGenerateStore } from '../stores/counter'
 import * as lodash from 'lodash'
 import * as echarts from 'echarts';
 import MyChart from './MyChart.vue';
+import { fetchData } from '@/utils/http';
 export default {
     name: 'Com_right_2',
     methods: {
         setCharts: function () {
-            var efficientP = Number(lodash.random(3, 10, true).toFixed(2));
-            var inputP = Number(lodash.random(3, 10, true).toFixed(2));
-            this.option.series[0].data = [inputP, efficientP];
+            fetchData('/index/GetData/resource_realtime_data/cid/gfbwx_active_power').then((data) => {
+                // console.log(data.item.value);
+                this.option.series[0].data[1] = data.item.value;
+            })
+            fetchData('/index/GetData/resource_realtime_data/cid/gfbwx_input_power').then((data) => {
+                // console.log(data.item.value);
+                this.option.series[0].data[0] = data.item.value;
+            })
         },
         updateData: function () {
             this.setCharts();
@@ -41,6 +47,9 @@ export default {
     },
     components: {
         MyChart
+    },
+    created() {
+
     },
     beforeMount() {
         this.setCharts();
@@ -89,21 +98,21 @@ export default {
                         data: [8.76, 7.65],
                         barWidth: '80%',
                         itemStyle: {
-                            
-                                color: new echarts.graphic.LinearGradient(
-                                    1, 0, 0, 0,
-                                    [
-                                        {
-                                            offset: 0,
-                                            color: 'rgba(73, 191, 245, 0.8)',
-                                        },
-                                        {
-                                            offset: 1,
-                                            color: 'rgba(73, 191, 245, 0.2)'
-                                        }
-                                    ]
-                                )
-                            
+
+                            color: new echarts.graphic.LinearGradient(
+                                1, 0, 0, 0,
+                                [
+                                    {
+                                        offset: 0,
+                                        color: 'rgba(73, 191, 245, 0.8)',
+                                    },
+                                    {
+                                        offset: 1,
+                                        color: 'rgba(73, 191, 245, 0.2)'
+                                    }
+                                ]
+                            )
+
 
 
                         },

@@ -3,23 +3,24 @@
         <div class="grid grid_right_1 left_1">
             <table class="table_left_1">
                 <tr>
-                    <td class="table_type">{{ tableData.yesterdayGenerate.title }}</td>
-                    <td>
-                        <span>{{ tableData.yesterdayGenerate.value }}</span>&nbsp&nbsp<span class="unit-style"> {{
-                            tableData.yesterdayGenerate.unit }}</span>
-                    </td>
                     <td class="table_type">{{ tableData.todayGenerate.title }}</td>
                     <td>
                         <span>{{ tableData.todayGenerate.value }}</span>&nbsp&nbsp<span class="unit-style"> {{
                             tableData.todayGenerate.unit }}</span>
                     </td>
+                    <td class="table_type">{{ tableData.yesterdayGenerate.title }}</td>
+                    <td>
+                        <span>{{ tableData.yesterdayGenerate.value }}</span>&nbsp&nbsp<span class="unit-style"> {{
+                            tableData.yesterdayGenerate.unit }}</span>
+                    </td>
+                    
                 </tr>
                 <tr>
-                    <td class="table_type">{{ tableData.yesterdayUse.title }}</td>
+                    <td class="table_type">{{ tableData.officeUse.title }}</td>
 
                     <td>
-                        <span>{{ tableData.yesterdayUse.value }}</span>&nbsp&nbsp<span class="unit-style"> {{
-                            tableData.yesterdayUse.unit }}</span>
+                        <span>{{ tableData.officeUse.value }}</span>&nbsp&nbsp<span class="unit-style"> {{
+                            tableData.officeUse.unit }}</span>
                     </td>
                     <td class="table_type">{{ tableData.todayUse.title }}</td>
 
@@ -46,7 +47,7 @@ import { useGenerateStore } from '../stores/counter'
 import * as lodash from 'lodash'
 import * as echarts from 'echarts';
 import MyChart from './MyChart.vue';
-
+import { fetchData } from '@/utils/http';
 
 
 export default {
@@ -55,6 +56,9 @@ export default {
         initData: function () {
             this.setCharts();
         },
+        // fetchNewData(url) {
+        //     fetchData(url);
+        // },
 
         setCharts: function () {
             var dayOneUse = lodash.random(10000, 50000);
@@ -73,22 +77,31 @@ export default {
             var daySixGenerate = gen_store.getDay6();
             this.option.series[0].data = [dayOneGenerate, dayTwoGenerate, dayThreeGenerate, dayFourGenerate, dayFiveGenerate, daySixGenerate];
             this.option.series[1].data = [dayOneUse, dayTwoUse, dayThreeUse, dayFourUse, dayFiveUse, daySixUse];
-            this.tableData.todayGenerate.value = daySixGenerate;
-            this.tableData.todayUse.value = daySixUse;
-            this.tableData.yesterdayGenerate.value = dayFiveGenerate;
-            this.tableData.yesterdayUse.value = dayFiveUse;
+            //今日发电
+            fetchData('/index/GetData/resource_realtime_data/cid/gfbwx_today_power_generation').then((data) => {
+                // console.log(data);
+                this.tableData.todayGenerate.value = data.item.value;
+            })
+            //营业厅用电
+            fetchData('/index/GetData/resource_realtime_data/cid/gfyyt_fka').then((data) => {
+                // console.log(data);
+                this.tableData.officeUse.value = data.item.value;
+            })
         },
         updateData() {
-
-
             this.setCharts();
             this.$refs.chart1.updateMyChart();
+        },
 
-        }
 
     },
     created() {
+        // this.fetchNewData(`index/GetData/resource_realtime_data/cid/gfbwx_pn`);
         this.initData();
+
+        // fetchData('/index/GetData/resource_realtime_data/cid/gfbwx_pn').then((data)=>{
+        //     console.log(data)
+        // })
     },
     beforeMount() {
 
@@ -196,8 +209,8 @@ export default {
                     value: '43316',
                     unit: 'kWh',
                 },
-                yesterdayUse: {
-                    title: '昨日用电量：',
+                officeUse: {
+                    title: '营业厅用电量：',
                     value: '42085',
                     unit: 'kWh',
                 },

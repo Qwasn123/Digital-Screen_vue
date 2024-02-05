@@ -2,9 +2,9 @@
     <div class="grid grid_right_1">
         <table>
             <tr v-for="(row, index) in tableData" :key="index">
-                <td class="table_type tiny_type">{{ tableData.pMax.title }}</td>
+                <td class="table_type tiny_type">{{ tableData.pNum.title }}</td>
                 <td class="table_type tiny_data">
-                    <span>{{ tableData.pMax.value }}</span>&nbsp&nbsp<span class="unit-style"> {{ tableData.pMax.unit
+                    <span>{{ tableData.pNum.value }}</span>&nbsp&nbsp<span class="unit-style"> {{ tableData.pNum.unit
                     }}</span>
                 </td>
 
@@ -17,16 +17,17 @@
 
 <script>
 import * as lodash from 'lodash'
+import { fetchData } from '@/utils/http'
 export default {
     data() {
         return {
             // 表格数据
             tableData: {
-                pMax: {
-                    title: '最大有功功率Pmax: ',
+                pNum: {
+                    title: '功率因数：',
                     value: '0',
-                    unit: ' kW'
-                }
+                    unit: ''
+                },
             },
             interval: {
                 value: '1000'
@@ -36,16 +37,25 @@ export default {
     name: 'Com_right_1_5',
     methods: {
         updateP: function () {
-            var nowP = Number(lodash.random(0, 10,true).toFixed(2));
-            if (nowP >= this.tableData.pMax.value) {
-                this.tableData.pMax.value = nowP;
-            }
+            fetchData('/index/GetData/resource_realtime_data/cid/gfbwx_pmax').then((data) => {
+                // console.log(data);
+                this.tableData.pMax.value = data.item.value;
+            })
         }
     },
+    created() {
+        fetchData('/index/GetData/resource_realtime_data/cid/gfbwx_pmax').then((data) => {
+            // console.log(data);
+            this.tableData.pMax.value = data.item.value;
+        })
+    },
     mounted() {
-       setInterval(() => {
-        this.updateP();
-       } , this.interval.value)
+        setInterval(() => {
+            fetchData('/index/GetData/resource_realtime_data/cid/gfbwx_power_factor').then((data) => {
+                this.tableData.pNum.value = data.item.value
+            })
+            
+        }, this.interval.value)
     },
 }
 

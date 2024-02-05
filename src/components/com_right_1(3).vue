@@ -18,6 +18,7 @@ table {
 </style>
 
 <script>
+import { fetchData } from '@/utils/http';
 export default {
     data() {
         return {
@@ -25,15 +26,26 @@ export default {
             tableData: {
                 stringNum: {
                     title: '组串个数:  ',
-                    value: '8'
+                    value: '0'
                 }
-            }
+            },
+            interval: {
+                value: '1000'
+            },
         };
     },
     name: 'Com_right_1_3',
     methods: {
 
-    }
+    },
+    mounted() {
+        setInterval(() => {
+            fetchData('/index/GetData/resource_realtime_data/cid/gfbwx_series_num').then((data) => {
+                // console.log(data.item.value);
+                this.tableData.stringNum.value = data.item.value;
+            })
+        }, this.interval.value)
+    },
 }
 
 </script>

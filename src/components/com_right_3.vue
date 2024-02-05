@@ -9,17 +9,18 @@
                 </td>
             </tr>
             <tr>
-                <td class="table_type tiny_type">{{ tableData.pNum.title }}</td>
+                <td class="table_type tiny_type">{{ tableData.pMax.title }}</td>
                 <td class="table_type tiny_data">
-                    <span>{{ tableData.pNum.value }}</span>&nbsp&nbsp<span class="unit-style"> {{ tableData.pNum.unit
+                    <span>{{ tableData.pMax.value }}</span>&nbsp&nbsp<span class="unit-style"> {{ tableData.pMax.unit
                     }}</span>
                 </td>
+                
             </tr>
             <tr>
-                <td class="table_type tiny_type">{{ tableData.efficiency.title }}</td>
+                <td class="table_type tiny_type">{{ tableData.sMax.title }}</td>
                 <td class="table_type tiny_data">
-                    <span>{{ tableData.efficiency.value }}</span>&nbsp&nbsp<span class="unit-style"> {{
-                        tableData.efficiency.unit }}</span>
+                    <span>{{ tableData.sMax.value }}</span>&nbsp&nbsp<span class="unit-style"> {{ tableData.sMax.unit
+                    }}</span>
                 </td>
             </tr>
         </table>
@@ -33,21 +34,49 @@ table {
 </style>
 
 <script>
+import { fetchData } from '@/utils/http'
 import * as lodash from 'lodash'
 export default {
     methods: {
         updatePNum: function () {
             this.tableData.pNum.value = Number(lodash.random(0.5, 1, true).toFixed(2));
         },
-        updateEfficiency:function(){
-            this.tableData.efficiency.value = Number(lodash.random(80, 100, true).toFixed(2));
-        },
+        
+        updateS: function () {
+            fetchData('/index/GetData/resource_realtime_data/cid/gfbwx_smax').then((data) => {
+                // console.log(data.item.value);
+                this.tableData.sMax.value = data.item.value;
+            })
+            
+        }
+    },
+    created() {
+        //efficiency
+        fetchData('/index/GetData/resource_realtime_data/cid/gfbwx_pn').then((data) => {
+            // console.log(data.item.value);
+            this.tableData.efficiency.value = data.item.value;
+        })
+        //pNum
+        fetchData('/index/GetData/resource_realtime_data/cid/gfbwx_power_factor').then((data) => {
+            // console.log(data.item.value);
+            this.tableData.pNum.value = data.item.value;
+        })
+        //todayMaxP
+        fetchData('/index/GetData/resource_realtime_data/cid/gfbwx_today_max_active_power').then((data) => {
+            // console.log(data.item.value);
+            this.tableData.todayMaxP.value = data.item.value;
+        })
     },
     mounted() {
         setInterval(() => {
-            this.updatePNum();
-            this.updateEfficiency();
+            
+            fetchData('/index/GetData/resource_realtime_data/cid/gfbwx_today_max_active_power').then((data) => {
+                this.tableData.todayMaxP.value = data.item.value
+            })
+            this.updateP();
+            this.updateS();
         }, this.interval.value)
+        
     },
     data() {
         return {
@@ -58,18 +87,18 @@ export default {
             tableData: {
                 todayMaxP: {
                     title: '当日峰值有功功率：',
-                    value: '13.24',
+                    value: '0',
                     unit: 'kW'
                 },
-                pNum: {
-                    title: '功率因数：',
-                    value: '0.85',
-                    unit: ''
+                pMax: {
+                    title: '最大有功功率Pmax: ',
+                    value: '0',
+                    unit: ' kW'
                 },
-                efficiency: {
-                    title: '效率：',
-                    value: '83.37',
-                    unit: '%'
+                sMax: {
+                    title: '最大视在功率Smax:  ',
+                    value: '0',
+                    unit: ' kW'
                 }
             }
         };

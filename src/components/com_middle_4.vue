@@ -3,7 +3,18 @@
         <h3 class="grid_middle_title">
             <slot>默认内容</slot>
         </h3>
-        <MyChart ref="chart3" :options="option" />
+        <table style="position: relative;bottom: 10px;">
+            <tr>
+                <td class="table_type middle_type">{{ this.tableData.pv4A.title }}</td>
+                <td class="table_type middle_data" style="position: relative;right: 30px;">{{ this.tableData.pv4A.value }}&nbsp<span class="unit-style"> {{ this.tableData.pv4A.unit
+                }} </span> </td>
+                <td class="table_type middle_type">{{ this.tableData.pv4V.title }}</td>
+                <td class="table_type middle_data" style="position: relative;right: 30px;">{{ this.tableData.pv4V.value }}&nbsp<span class="unit-style">{{ this.tableData.pv4V.unit
+                }}</span> </td>
+
+            </tr>
+        </table>
+        <MyChart ref="chart3" style="position: relative;bottom: 10px;" :options="option" />
     </div>
 </template>
 
@@ -74,6 +85,18 @@ export default {
     },
     data() {
         return {
+            tableData: {
+                pv4A: {
+                    title: 'PV4电流:',
+                    value: '0',
+                    unit: 'A',
+                },
+                pv4V: {
+                    title: 'PV4电压:',
+                    value: '0',
+                    unit: 'V',
+                },
+            },
             option: {
                 tooltip: {
                     trigger: 'axis'
